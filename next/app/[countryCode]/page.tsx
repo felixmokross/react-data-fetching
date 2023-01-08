@@ -12,7 +12,7 @@ export default async function HolidaysPage({ params }: HolidaysPageProps) {
     api(`NextPublicHolidays/${params.countryCode}`),
   ])) as [CountryInfo, PublicHoliday[]];
   return (
-    <>
+    <main>
       <h1>Holidays for {country.commonName}</h1>
       <table>
         <thead>
@@ -34,6 +34,6 @@ export default async function HolidaysPage({ params }: HolidaysPageProps) {
           ))}
         </tbody>
       </table>
-    </>
+    </main>
   );
 }

@@ -1,18 +1,20 @@
-import type { DataFunctionArgs } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { CountryInfo, PublicHoliday } from "./types";
+import { api } from "./util";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { format } from "date-fns";
-import type { CountryInfo } from "~/types";
-import { api } from "~/util";
 
-export async function loader({ params }: DataFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   return (await Promise.all([
     api(`CountryInfo/${params.countryCode}`),
     api(`NextPublicHolidays/${params.countryCode}`),
   ])) as [CountryInfo, PublicHoliday[]];
 }
 
-export default function HolidaysPage() {
-  const [country, holidays] = useLoaderData<typeof loader>();
+export default function Countries() {
+  const [country, holidays] = useLoaderData() as Awaited<
+    ReturnType<typeof loader>
+  >;
+
   return (
     <main>
       <h1>Holidays for {country.commonName}</h1>
@@ -39,23 +41,3 @@ export default function HolidaysPage() {
     </main>
   );
 }
-
-type PublicHolidayType =
-  | "Public"
-  | "Bank"
-  | "School"
-  | "Authorities"
-  | "Optional"
-  | "Observance";
-
-type PublicHoliday = {
-  date: string;
-  localName: string;
-  name: string;
-  countryCode: string;
-  fixed: boolean;
-  global: boolean;
-  counties: string[];
-  launchYear: number;
-  types: PublicHolidayType[];
-};
