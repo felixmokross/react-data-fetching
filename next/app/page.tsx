@@ -1,39 +1,18 @@
 import Link from "next/link";
-
-type PublicHolidayType =
-  | "Public"
-  | "Bank"
-  | "School"
-  | "Authorities"
-  | "Optional"
-  | "Observance";
-
-type PublicHoliday = {
-  date: string;
-  localName: string;
-  name: string;
-  countryCode: string;
-  fixed: boolean;
-  global: boolean;
-  counties: string[];
-  launchYear: number;
-  types: PublicHolidayType[];
-};
+import { Country } from "./types";
+import { api } from "./util";
 
 export default async function Home() {
-  const publicHolidays = (await fetch(
-    "https://date.nager.at/api/v3/nextpublicholidays/ch"
-  ).then((res) => res.json())) as PublicHoliday[];
+  const countries = (await api("AvailableCountries")) as Country[];
   return (
     <main>
       <ul>
-        {publicHolidays.map((ph) => (
-          <li key={ph.name}>{ph.name}</li>
+        {countries.map((c) => (
+          <li key={c.countryCode}>
+            <Link href={`/${c.countryCode.toLocaleLowerCase()}`}>{c.name}</Link>
+          </li>
         ))}
       </ul>
-      <p>
-        <Link href="other-page">Other page</Link>
-      </p>
     </main>
   );
 }

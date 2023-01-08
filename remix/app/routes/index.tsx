@@ -1,9 +1,20 @@
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
+import type { Country } from "~/types";
+import { api } from "~/util";
+
+export async function loader() {
+  return (await api("AvailableCountries")) as Country[];
+}
 
 export default function Index() {
+  const countries = useLoaderData<typeof loader>();
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <Link to="holidays">Holidays</Link>
-    </div>
+    <ul>
+      {countries.map((c) => (
+        <li key={c.countryCode}>
+          <Link to={c.countryCode.toLocaleLowerCase()}>{c.name}</Link>
+        </li>
+      ))}
+    </ul>
   );
 }
