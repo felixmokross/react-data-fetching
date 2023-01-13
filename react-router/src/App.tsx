@@ -5,13 +5,18 @@ import Holidays, { loader as holidaysLoader } from "./holidays";
 const router = createBrowserRouter([
   {
     path: "/",
-    loader: countriesLoader,
-    element: <Countries />,
-  },
-  {
-    path: "/:countryCode",
-    loader: holidaysLoader,
-    element: <Holidays />,
+    children: [
+      {
+        index: true,
+        loader: countriesLoader,
+        element: <Countries />,
+      },
+      {
+        path: ":countryCode",
+        loader: holidaysLoader,
+        element: <Holidays />,
+      },
+    ],
   },
 ]);
 

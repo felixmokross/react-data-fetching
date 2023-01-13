@@ -1,0 +1,35 @@
+import { QueryClient } from "@tanstack/react-query";
+import { Link, useLoaderData } from "react-router-dom";
+import { Country } from "./types";
+import { api } from "./util";
+
+function countriesQuery() {
+  return {
+    queryKey: ["countries"],
+    queryFn: async () => (await api("AvailableCountries")) as Country[],
+  };
+}
+
+export function loader(queryClient: QueryClient) {
+  return async function loader() {
+    return queryClient.ensureQueryData(countriesQuery());
+  };
+}
+
+export default function Countries() {
+  const countries = useLoaderData() as Awaited<
+    ReturnType<ReturnType<typeof loader>>
+  >;
+
+  return (
+    <main>
+      <ul>
+        {countries.map((c) => (
+          <li key={c.countryCode}>
+            <Link to={c.countryCode.toLocaleLowerCase()}>{c.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
-function countryInfoQuery(countryCode: string): UseQueryOptions<CountryInfo> {
+function countryInfoQuery(countryCode: string) {
   return {
     queryKey: ["countries", countryCode, "info"],
     queryFn: async () =>
@@ -12,7 +12,7 @@ function countryInfoQuery(countryCode: string): UseQueryOptions<CountryInfo> {
   };
 }
 
-function holidaysQuery(countryCode: string): UseQueryOptions<PublicHoliday[]> {
+function holidaysQuery(countryCode: string) {
   return {
     queryKey: ["countries", countryCode, "holidays"],
     queryFn: async () =>

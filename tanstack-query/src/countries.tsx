@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Country } from "./types";
 import { api } from "./util";
 
-function countriesQuery(): UseQueryOptions<Country[]> {
+function countriesQuery() {
   return {
     queryKey: ["countries"],
-    queryFn: async () => await api("AvailableCountries"),
+    queryFn: async () => (await api("AvailableCountries")) as Country[],
   };
 }
 
