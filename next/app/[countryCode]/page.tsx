@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { CountryInfo, PublicHoliday } from "../types";
-import { api } from "../util";
+import { get } from "../util";
 
 type HolidaysPageProps = {
   params: { countryCode: string };
@@ -8,8 +8,8 @@ type HolidaysPageProps = {
 
 export default async function HolidaysPage({ params }: HolidaysPageProps) {
   const [country, holidays] = (await Promise.all([
-    api(`CountryInfo/${params.countryCode}`),
-    api(`NextPublicHolidays/${params.countryCode}`),
+    get(`CountryInfo/${params.countryCode}`),
+    get(`NextPublicHolidays/${params.countryCode}`),
   ])) as [CountryInfo, PublicHoliday[]];
   return (
     <main>

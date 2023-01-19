@@ -21,11 +21,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/:countryCode",
-    loader: holidaysLoader(queryClient),
-    element: <Holidays />,
-  },
 ]);
 
 function App() {

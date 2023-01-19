@@ -1,12 +1,12 @@
 import { QueryClient } from "@tanstack/react-query";
 import { Link, useLoaderData } from "react-router-dom";
 import { Country } from "./types";
-import { api } from "./util";
+import { get } from "./util";
 
 function countriesQuery() {
   return {
     queryKey: ["countries"],
-    queryFn: async () => (await api("AvailableCountries")) as Country[],
+    queryFn: async () => (await get("AvailableCountries")) as Country[],
   };
 }
 

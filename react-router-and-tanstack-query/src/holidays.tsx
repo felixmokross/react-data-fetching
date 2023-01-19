@@ -1,5 +1,5 @@
 import { CountryInfo, PublicHoliday } from "./types";
-import { api } from "./util";
+import { get } from "./util";
 import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { format } from "date-fns";
 import { QueryClient } from "@tanstack/react-query";
@@ -8,7 +8,7 @@ function countryInfoQuery(countryCode: string) {
   return {
     queryKey: ["countries", countryCode, "info"],
     queryFn: async () =>
-      (await api(`CountryInfo/${countryCode}`)) as CountryInfo,
+      (await get(`CountryInfo/${countryCode}`)) as CountryInfo,
   };
 }
 
@@ -16,7 +16,7 @@ function holidaysQuery(countryCode: string) {
   return {
     queryKey: ["countries", countryCode, "holidays"],
     queryFn: async () =>
-      (await api(`NextPublicHolidays/${countryCode}`)) as PublicHoliday[],
+      (await get(`NextPublicHolidays/${countryCode}`)) as PublicHoliday[],
   };
 }
 
@@ -26,13 +26,13 @@ export function loader(queryClient: QueryClient) {
   }: LoaderFunctionArgs) {
     if (!countryCode) throw new Error("No country code provided");
     return await Promise.all([
-      queryClient.ensureQueryData<CountryInfo>(countryInfoQuery(countryCode)),
+      queryClient.ensureQueryData(countryInfoQuery(countryCode)),
       queryClient.ensureQueryData(holidaysQuery(countryCode)),
     ]);
   };
 }
 
-export default function Countries() {
+export default function HolidaysPage() {
   const [country, holidays] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof loader>>
   >;

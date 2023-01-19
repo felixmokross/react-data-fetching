@@ -1,7 +1,6 @@
-export async function api(url: string) {
-  const res = await fetch(`https://date.nager.at/api/v3/` + url);
-  if (!res.ok) throw new Error("Failed to fetch API");
+export async function get(url: string) {
+  const res = await fetch(`https://date.nager.at/api/v3/${url}`);
+  if (!res.ok) throw new Error(`API returned ${res.status}`);
 
-  const json = await res.json();
-  return json;
+  return await res.json();
 }

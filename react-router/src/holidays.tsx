@@ -1,16 +1,16 @@
 import { CountryInfo, PublicHoliday } from "./types";
-import { api } from "./util";
+import { get } from "./util";
 import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { format } from "date-fns";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   return (await Promise.all([
-    api(`CountryInfo/${params.countryCode}`),
-    api(`NextPublicHolidays/${params.countryCode}`),
+    get(`CountryInfo/${params.countryCode}`),
+    get(`NextPublicHolidays/${params.countryCode}`),
   ])) as [CountryInfo, PublicHoliday[]];
 }
 
-export default function Countries() {
+export default function HolidaysPage() {
   const [country, holidays] = useLoaderData() as Awaited<
     ReturnType<typeof loader>
   >;

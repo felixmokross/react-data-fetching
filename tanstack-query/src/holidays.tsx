@@ -1,5 +1,5 @@
 import { CountryInfo, PublicHoliday } from "./types";
-import { api } from "./util";
+import { get } from "./util";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
@@ -8,7 +8,7 @@ function countryInfoQuery(countryCode: string) {
   return {
     queryKey: ["countries", countryCode, "info"],
     queryFn: async () =>
-      (await api(`CountryInfo/${countryCode}`)) as CountryInfo,
+      (await get(`CountryInfo/${countryCode}`)) as CountryInfo,
   };
 }
 
@@ -16,7 +16,7 @@ function holidaysQuery(countryCode: string) {
   return {
     queryKey: ["countries", countryCode, "holidays"],
     queryFn: async () =>
-      (await api(`NextPublicHolidays/${countryCode}`)) as PublicHoliday[],
+      (await get(`NextPublicHolidays/${countryCode}`)) as PublicHoliday[],
   };
 }
 

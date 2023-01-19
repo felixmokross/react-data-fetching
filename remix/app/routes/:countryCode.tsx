@@ -2,12 +2,12 @@ import type { DataFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { format } from "date-fns";
 import type { CountryInfo } from "~/types";
-import { api } from "~/util";
+import { get } from "~/util";
 
 export async function loader({ params }: DataFunctionArgs) {
   return (await Promise.all([
-    api(`CountryInfo/${params.countryCode}`),
-    api(`NextPublicHolidays/${params.countryCode}`),
+    get(`CountryInfo/${params.countryCode}`),
+    get(`NextPublicHolidays/${params.countryCode}`),
   ])) as [CountryInfo, PublicHoliday[]];
 }
 

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Countries, { loader as countriesLoader } from "./countries";
-import Holidays, { loader as holidaysLoader } from "./holidays";
+import CountriesPage, { loader as countriesLoader } from "./countries";
+import HolidaysPage, { loader as holidaysLoader } from "./holidays";
 
 const router = createBrowserRouter([
   {
@@ -9,12 +9,12 @@ const router = createBrowserRouter([
       {
         index: true,
         loader: countriesLoader,
-        element: <Countries />,
+        element: <CountriesPage />,
       },
       {
         path: ":countryCode",
         loader: holidaysLoader,
-        element: <Holidays />,
+        element: <HolidaysPage />,
       },
     ],
   },

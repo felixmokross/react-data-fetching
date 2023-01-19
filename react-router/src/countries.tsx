@@ -1,12 +1,12 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { Country } from "./types";
-import { api } from "./util";
+import { get } from "./util";
 
 export async function loader() {
-  return (await api("AvailableCountries")) as Country[];
+  return (await get("AvailableCountries")) as Country[];
 }
 
-export default function Countries() {
+export default function CountriesPage() {
   const countries = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
   return (

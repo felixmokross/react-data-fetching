@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Country } from "./types";
-import { api } from "./util";
+import { get } from "./util";
 
-export default async function Home() {
-  const countries = (await api("AvailableCountries")) as Country[];
+export default async function CountriesPage() {
+  const countries = (await get("AvailableCountries")) as Country[];
   return (
     <main>
       <ul>

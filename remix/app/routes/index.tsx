@@ -1,12 +1,12 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import type { Country } from "~/types";
-import { api } from "~/util";
+import { get } from "~/util";
 
 export async function loader() {
-  return (await api("AvailableCountries")) as Country[];
+  return (await get("AvailableCountries")) as Country[];
 }
 
-export default function Index() {
+export default function CountriesPage() {
   const countries = useLoaderData<typeof loader>();
   return (
     <main>
