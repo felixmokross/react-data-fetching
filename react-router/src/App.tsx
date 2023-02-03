@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CountriesPage, { loader as countriesLoader } from "./countries";
-import HolidaysPage, { loader as holidaysLoader } from "./holidays";
+import { CountriesPage, loader as countriesLoader } from "./countries-page";
+import { HolidaysPage, loader as holidaysLoader } from "./holidays-page";
 
 const router = createBrowserRouter([
   {

@@ -1,16 +1,16 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Countries from "./countries";
-import Holidays from "./holidays";
+import { CountriesPage } from "./countries-page";
+import { HolidaysPage } from "./holidays-page";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Countries />,
+    element: <CountriesPage />,
   },
   {
     path: "/:countryCode",
-    element: <Holidays />,
+    element: <HolidaysPage />,
   },
 ]);
 

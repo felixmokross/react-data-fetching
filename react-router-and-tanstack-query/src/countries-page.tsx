@@ -16,7 +16,7 @@ export function loader(queryClient: QueryClient) {
   };
 }
 
-export default function Countries() {
+export function CountriesPage() {
   const countries = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof loader>>
   >;

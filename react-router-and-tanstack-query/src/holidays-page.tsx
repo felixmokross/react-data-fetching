@@ -32,7 +32,7 @@ export function loader(queryClient: QueryClient) {
   };
 }
 
-export default function HolidaysPage() {
+export function HolidaysPage() {
   const [country, holidays] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof loader>>
   >;

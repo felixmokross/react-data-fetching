@@ -10,7 +10,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   ])) as [CountryInfo, PublicHoliday[]];
 }
 
-export default function HolidaysPage() {
+export function HolidaysPage() {
   const [country, holidays] = useLoaderData() as Awaited<
     ReturnType<typeof loader>
   >;

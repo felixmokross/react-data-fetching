@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Country } from "./types";
 import { get } from "./util";
@@ -10,7 +10,7 @@ function countriesQuery() {
   };
 }
 
-export default function Countries() {
+export function CountriesPage() {
   const { data: countries, status: countriesStatus } = useQuery(
     countriesQuery()
   );

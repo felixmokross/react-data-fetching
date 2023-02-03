@@ -2,7 +2,7 @@ import { CountryInfo, PublicHoliday } from "./types";
 import { get } from "./util";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 function countryInfoQuery(countryCode: string) {
   return {
@@ -20,7 +20,7 @@ function holidaysQuery(countryCode: string) {
   };
 }
 
-export default function Countries() {
+export function HolidaysPage() {
   const { countryCode } = useParams();
   if (!countryCode) throw new Error("No country code provided");
 

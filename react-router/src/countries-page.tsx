@@ -6,7 +6,7 @@ export async function loader() {
   return (await get("AvailableCountries")) as Country[];
 }
 
-export default function CountriesPage() {
+export function CountriesPage() {
   const countries = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
   return (
